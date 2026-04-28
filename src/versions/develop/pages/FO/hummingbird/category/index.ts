@@ -109,15 +109,21 @@ class FoCategoryPage extends CategoryPageVersion implements FoCategoryPageInterf
    * @return {Promise<void>}
    */
   async filterByCheckbox(page: Page, facetType: string, checkboxName: string): Promise<void> {
-    await page.locator(this.filterTypeButton(facetType)).click();
-    await page.waitForTimeout(2000);
-    if (facetType === 'Color') {
-      await page.locator(`${this.searchFiltersLabel} span[style*="${checkboxName}"]`).click();
-    } else {
-      await page.locator(`${this.searchFiltersLabel} a[href*="${checkboxName}"]`).click();
-    }
-    await page.locator(this.filterTypeButton(facetType)).click();
-    await page.waitForTimeout(2000);
+    const selector = facetType === 'Color'
+      ? `${this.searchFiltersLabel} span[style*="${checkboxName}"]`
+      : `${this.searchFiltersLabel} a[href*="${checkboxName}"]`;
+
+    // Cocher le filtre
+    await Promise.all([
+      page.waitForURL(/.*\?q=.*/),
+      page.locator(selector).setChecked(true),
+    ]);
+
+    // Décocher le filtre
+    await Promise.all([
+      page.waitForURL(url => !url.toString().includes('?q=')),
+      page.locator(selector).setChecked(false),
+    ]);
   }
 
   /**
@@ -135,7 +141,7 @@ class FoCategoryPage extends CategoryPageVersion implements FoCategoryPageInterf
     await super.filterByPrice(page, minPrice, maxPrice, filterFrom, filterTo);
 
     await page.locator(this.filterTypeButton('Price')).click();
-    await page.waitForTimeout(2000);
+    await this.waitForAttachedSelector(page, 'accordion-collapse.show', 2000);
   }
 
   /**
