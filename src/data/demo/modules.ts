@@ -4,7 +4,7 @@ export default {
   blockwishlist: new FakerModule({
     tag: 'blockwishlist',
     name: 'Wishlist',
-    versionCurrent: 'v3.0.2',
+    versionCurrent: 'v4.0.0',
     releaseZip: 'https://github.com/PrestaShop/blockwishlist/releases/download/%version%/blockwishlist.zip',
   }),
   contactForm: new FakerModule({
@@ -58,7 +58,7 @@ export default {
   psFacetedSearch: new FakerModule({
     tag: 'ps_facetedsearch',
     name: 'Faceted search',
-    versionCurrent: 'v4.0.3',
+    versionCurrent: 'v5.0.0',
     releaseZip: 'https://github.com/PrestaShop/ps_facetedsearch/releases/download/%version%/ps_facetedsearch.zip',
   }),
   psGdpr: new FakerModule({
@@ -72,8 +72,8 @@ export default {
   psNewProducts: new FakerModule({
     tag: 'ps_newproducts',
     name: 'New products block',
-    versionCurrent: 'v1.0.5',
-    versionOld: 'v1.0.4',
+    versionCurrent: 'v2.0.1',
+    versionOld: 'v1.0.5',
     releaseZip: 'https://github.com/PrestaShop/ps_newproducts/releases/download/%version%/ps_newproducts.zip',
   }),
   psSupplierList: new FakerModule({
